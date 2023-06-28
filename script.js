@@ -10,7 +10,8 @@ function setGradient(){
 	 + ", "
 	 +color2.value
 	 +")";
-
+	 button.style.border = "5px solid" + color1.value;
+	 button.style.background = color2.value;
 	 css.textContent = body.style.background + ";";
 }
 

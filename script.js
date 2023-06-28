@@ -12,8 +12,16 @@ function setGradient(){
 	 +")";
 	 button.style.border = "5px solid" + color1.value;
 	 button.style.background = color2.value;
+	 if(isLight(color2.value)){
+	 	button.style.color = "black";
+	 }
+	 else
+	 {
+	 	button.style.color  = "white";
+	 }
 	 css.textContent = body.style.background + ";";
 }
+
 
 function valueToHEX(c) {
     var hex = c.toString(16);
@@ -26,6 +34,25 @@ function valueToHEX(c) {
 // Converts RBG to hex
 function rgbToHex(r, g, b) {
     return (valueToHEX(r) + valueToHEX(g) + valueToHEX(b));
+}
+
+function isLight(c)
+{
+	var c = c.substring(1);      // strip #
+	var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+	var r = (rgb >> 16) & 0xff;  // extract red
+	var g = (rgb >>  8) & 0xff;  // extract green
+	var b = (rgb >>  0) & 0xff;  // extract blue
+
+	var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+	if (luma > 128) {
+	    return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 function changeBackground()
@@ -42,10 +69,16 @@ function changeBackground()
 
 	color1.value = "#" + rgbToHex(rgb[0],rgb[1],rgb[2]);
 	var button = document.querySelector("button");
-	console.log(button.classList);
 	button.style.border = "5px solid" + color1.value;
 	color2.value = "#" + rgbToHex(rgb[3],rgb[4],rgb[5]);
 	button.style.background = color2.value;
+	 if(isLight(color2.value)){
+	 	button.style.color = "black";
+	 }
+	 else
+	 {
+	 	button.style.color  = "white";
+	 }
 	setGradient();
 
 }
